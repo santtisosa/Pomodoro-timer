@@ -76,9 +76,9 @@ function App() {
       soundPath = soundConfig.url;
     } else {
       const soundMap = {
-        bell: '/sounds/bell.mp3',
-        chime: '/sounds/chime.mp3',
-        ping: '/sounds/ping.mp3',
+        bell: `${import.meta.env.BASE_URL}sounds/bell.mp3`,
+        chime: `${import.meta.env.BASE_URL}sounds/chime.mp3`,
+        ping: `${import.meta.env.BASE_URL}sounds/ping.mp3`,
       };
       soundPath = soundMap[soundConfig] || soundMap.bell;
     }

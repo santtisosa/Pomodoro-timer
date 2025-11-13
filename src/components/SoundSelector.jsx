@@ -14,11 +14,10 @@ export default function SoundSelector({ label, value, onChange, customSound }) {
   const audioRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  // Sonidos predefinidos incluidos
   const predefinedSounds = [
-    { id: 'bell', name: 'Campana', path: '/sounds/bell.mp3' },
-    { id: 'chime', name: 'Chime', path: '/sounds/chime.mp3' },
-    { id: 'ping', name: 'Ping', path: '/sounds/ping.mp3' },
+    { id: 'bell', name: 'Campana', path: `${import.meta.env.BASE_URL}sounds/bell.mp3` },
+    { id: 'chime', name: 'Chime', path: `${import.meta.env.BASE_URL}sounds/chime.mp3` },
+    { id: 'ping', name: 'Ping', path: `${import.meta.env.BASE_URL}sounds/ping.mp3` },
   ];
 
   // Previsualizar sonido

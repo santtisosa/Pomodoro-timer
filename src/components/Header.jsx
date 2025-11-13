@@ -1,12 +1,5 @@
 import classNames from 'classnames';
 
-/**
- * Componente de encabezado con título y controles de tema
- * @param {Object} props
- * @param {boolean} props.darkMode - Si está en modo oscuro
- * @param {Function} props.onToggleDarkMode - Callback para cambiar tema
- * @param {Function} props.onOpenSettings - Callback para abrir configuración
- */
 export default function Header({ darkMode, onToggleDarkMode, onOpenSettings }) {
   return (
     <header className="w-full max-w-6xl mx-auto px-4 py-6">

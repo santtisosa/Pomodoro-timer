@@ -1,22 +1,14 @@
 import { useMemo } from 'react';
 import classNames from 'classnames';
 
-/**
- * Componente que muestra un anillo de progreso circular animado SVG
- * @param {Object} props
- * @param {number} props.progress - Progreso actual (0-100)
- * @param {number} props.size - Tamaño del anillo en píxeles
- * @param {number} props.strokeWidth - Grosor del trazo
- * @param {string} props.stage - Etapa actual ('work', 'shortBreak', 'longBreak')
- */
 export default function ProgressRing({
   progress = 0,
   size = 320,
   strokeWidth = 12,
   stage = 'work'
 }) {
-  // Calcular parámetros del círculo
-  const radius = (size - strokeWidth) / 2;
+  const padding = 20;
+  const radius = (size - strokeWidth - padding * 2) / 2;
   const circumference = 2 * Math.PI * radius;
 
   // Calcular offset para el progreso (animación inversa: desde arriba en sentido horario)
@@ -43,8 +35,8 @@ export default function ProgressRing({
         className="transform -rotate-90"
         width={size}
         height={size}
+        style={{ overflow: 'visible' }}
       >
-        {/* Círculo de fondo (track) */}
         <circle
           className={classNames('transition-colors duration-500', bgColors[stage])}
           stroke="currentColor"
@@ -56,7 +48,6 @@ export default function ProgressRing({
           opacity="0.3"
         />
 
-        {/* Círculo de progreso */}
         <circle
           className={classNames(
             'transition-all duration-500 ease-linear',

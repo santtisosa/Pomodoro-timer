@@ -1,12 +1,5 @@
 import classNames from 'classnames';
 
-/**
- * Componente de controles del temporizador (Start/Pause/Reset)
- * @param {Object} props
- * @param {boolean} props.isRunning - Si el timer está corriendo
- * @param {Function} props.onToggle - Callback para iniciar/pausar
- * @param {Function} props.onReset - Callback para resetear
- */
 export default function Controls({ isRunning, onToggle, onReset }) {
   return (
     <div className="flex items-center justify-center gap-4">

@@ -2,14 +2,6 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import SoundSelector from './SoundSelector';
 
-/**
- * Modal de configuración del Pomodoro
- * @param {Object} props
- * @param {boolean} props.isOpen - Si el modal está abierto
- * @param {Function} props.onClose - Callback para cerrar
- * @param {Object} props.config - Configuración actual
- * @param {Function} props.onSave - Callback para guardar configuración
- */
 export default function SettingsModal({ isOpen, onClose, config, onSave }) {
   const [localConfig, setLocalConfig] = useState(config);
 

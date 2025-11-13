@@ -1,14 +1,6 @@
 import { useState, useRef } from 'react';
 import classNames from 'classnames';
 
-/**
- * Componente para seleccionar y previsualizar sonidos
- * @param {Object} props
- * @param {string} props.label - Etiqueta del selector
- * @param {string} props.value - Sonido seleccionado actual
- * @param {Function} props.onChange - Callback cuando cambia la selección
- * @param {Object} props.customSound - Archivo de sonido personalizado
- */
 export default function SoundSelector({ label, value, onChange, customSound }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);

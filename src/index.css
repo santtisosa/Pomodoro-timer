@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card base */
+  .glass-card {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20 dark:border-white/10;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-white/15 dark:hover:bg-white/10 hover:shadow-2xl hover:scale-[1.02];
+  }
+
+  /* Botones con efecto glass */
+  .btn-glass {
+    @apply px-6 py-3 rounded-2xl font-medium backdrop-blur-md transition-all duration-200
+    border border-white/30 dark:border-white/20
+    hover:scale-105 hover:shadow-lg active:scale-95
+    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900;
+  }
+
+  .btn-primary {
+    @apply btn-glass bg-primary-500/80 hover:bg-primary-600/90 text-white;
+  }
+
+  .btn-secondary {
+    @apply btn-glass bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20
+    text-gray-800 dark:text-white;
+  }
+
+  /* Input con efecto glass */
+  .input-glass {
+    @apply px-4 py-2 rounded-xl bg-white/20 dark:bg-white/10 backdrop-blur-md
+    border border-white/30 dark:border-white/20
+    text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
+    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:bg-white/30 dark:focus:bg-white/20
+    transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  /* Animaciones personalizadas */
+  .animate-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Scrollbar personalizado */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full hover:bg-white/30;
+  }
+}

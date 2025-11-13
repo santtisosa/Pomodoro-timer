@@ -66,14 +66,13 @@ export const useTimer = ({
       intervalRef.current = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
-            setIsRunning(false);
-
             if (onFinishRef.current) {
               onFinishRef.current(stage);
             }
 
             setTimeout(() => {
               goToNextStage();
+              setIsRunning(true);
             }, 100);
 
             return 0;

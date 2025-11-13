@@ -12,7 +12,6 @@ import Timer from './components/Timer';
 import Controls from './components/Controls';
 import SettingsModal from './components/SettingsModal';
 
-// Configuración por defecto
 const DEFAULT_CONFIG = {
   workDuration: 25,
   shortBreakDuration: 5,
@@ -30,20 +29,14 @@ const DEFAULT_CONFIG = {
 };
 
 function App() {
-  // Estado de configuración
   const [config, setConfig] = useState(() => {
-    // Cargar desde localStorage o usar valores por defecto
     const saved = localStorage.getItem('pomodoroConfig');
     return saved ? { ...DEFAULT_CONFIG, ...JSON.parse(saved) } : DEFAULT_CONFIG;
   });
 
-  // Estado del modal de configuración
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-
-  // Referencia para el audio
   const audioRef = useRef(null);
 
-  // Hook del timer con callback al finalizar
   const {
     timeLeft,
     isRunning,
@@ -60,41 +53,28 @@ function App() {
     onFinish: handleStageFinish,
   });
 
-  /**
-   * Manejar finalización de etapa
-   * @param {string} completedStage - Etapa que acaba de terminar
-   */
   function handleStageFinish(completedStage) {
-    // Reproducir sonido
     playSound(completedStage);
 
-    // Mostrar notificación
     if (config.notifications) {
       const { title, body } = getNotificationMessage(completedStage);
       showNotification(title, body);
     }
 
-    // Vibrar
     if (config.vibration) {
       vibrate([200, 100, 200]);
     }
   }
 
-  /**
-   * Reproducir sonido según la configuración
-   * @param {string} stageType - Tipo de etapa
-   */
   function playSound(stageType) {
     if (!audioRef.current) return;
 
     const soundConfig = config.sounds[stageType];
     let soundPath;
 
-    // Determinar la ruta del sonido
     if (typeof soundConfig === 'object' && soundConfig.type === 'custom') {
       soundPath = soundConfig.url;
     } else {
-      // Sonido predefinido
       const soundMap = {
         bell: '/sounds/bell.mp3',
         chime: '/sounds/chime.mp3',
@@ -110,13 +90,9 @@ function App() {
     });
   }
 
-  /**
-   * Guardar configuración en localStorage
-   */
   useEffect(() => {
     localStorage.setItem('pomodoroConfig', JSON.stringify(config));
 
-    // Aplicar clase de dark mode al documento
     if (config.darkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -124,21 +100,14 @@ function App() {
     }
   }, [config]);
 
-  /**
-   * Solicitar permisos de notificación al montar
-   */
   useEffect(() => {
     if (config.notifications) {
       requestNotificationPermission();
     }
   }, [config.notifications]);
 
-  /**
-   * Atajos de teclado
-   */
   useEffect(() => {
     const handleKeyPress = (e) => {
-      // Ignorar si está escribiendo en un input
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
         return;
       }
@@ -162,9 +131,6 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [toggleTimer, resetTimer]);
 
-  /**
-   * Actualizar título de la pestaña con el tiempo restante
-   */
   useEffect(() => {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
@@ -179,32 +145,26 @@ function App() {
     document.title = `${formatted} ${stageEmoji[stage]} Pomodoro Timer`;
   }, [timeLeft, stage]);
 
-  // Guardar y cerrar configuración
   const handleSaveConfig = (newConfig) => {
     setConfig(newConfig);
   };
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setConfig(prev => ({ ...prev, darkMode: !prev.darkMode }));
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-100 via-blue-50 to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
-      {/* Audio element oculto para reproducir sonidos */}
       <audio ref={audioRef} />
 
-      {/* Header */}
       <Header
         darkMode={config.darkMode}
         onToggleDarkMode={toggleDarkMode}
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
-      {/* Contenido principal */}
       <main className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="glass-card max-w-2xl w-full p-8 md:p-12 space-y-8">
-          {/* Timer */}
           <Timer
             timeLeft={timeLeft}
             progress={progress}
@@ -212,7 +172,6 @@ function App() {
             completedCycles={completedCycles}
           />
 
-          {/* Controles */}
           <Controls
             isRunning={isRunning}
             onToggle={toggleTimer}
@@ -221,10 +180,8 @@ function App() {
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Modal de configuración */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

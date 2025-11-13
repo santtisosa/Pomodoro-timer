@@ -1,28 +1,17 @@
 import classNames from 'classnames';
 import ProgressRing from './ProgressRing';
 
-/**
- * Componente que muestra el temporizador principal con el tiempo restante
- * @param {Object} props
- * @param {number} props.timeLeft - Segundos restantes
- * @param {number} props.progress - Progreso (0-100)
- * @param {string} props.stage - Etapa actual
- * @param {number} props.completedCycles - Ciclos completados
- */
 export default function Timer({ timeLeft, progress, stage, completedCycles }) {
-  // Formatear tiempo en MM:SS
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-  // Nombres de etapas para mostrar
   const stageNames = {
     work: 'Trabajo',
     shortBreak: 'Descanso Corto',
     longBreak: 'Descanso Largo',
   };
 
-  // Colores de texto según etapa
   const stageColors = {
     work: 'text-primary-400',
     shortBreak: 'text-blue-400',

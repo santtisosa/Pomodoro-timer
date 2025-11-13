@@ -9,6 +9,8 @@ Un temporizador Pomodoro moderno y personalizable con diseño glassmorphism.
 ## 🌐 Demo
 
 **[Ver Demo en Vivo](https://santtisosa.github.io/Pomodoro-timer/)**
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/8effe3f5-d89c-41d8-98ce-d10829a33de0" />
+
 
 ## 🌟 Características
 
